@@ -17,9 +17,9 @@ let users = [];
 
 let messages = {
   general: [],
-  random: [],
-  jokes: [],
-  javascript: [],
+  // random: [],
+  // jokes: [],
+  // javascript: [],
 };
 
 io.on("connection", (socket) => {
