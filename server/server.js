@@ -17,9 +17,9 @@ let users = [];
 
 let messages = {
   general: [],
-  // random: [],
-  // jokes: [],
-  // javascript: [],
+  random: [],
+  jokes: [],
+  javascript: [],
 };
 
 io.on("connection", (socket) => {
@@ -39,39 +39,39 @@ io.on("connection", (socket) => {
     cb(messages[roomName]);
   });
 
-  socket.on("get users", (cb) => {
-    cb(users);
-  });
+  // socket.on("get users", (cb) => {
+  //   cb(users);
+  // });
 
-  socket.on("get messages", (chatName, cb) => {
-    if (typeof cb === 'function') {
-      cb(messages[chatName]);
-    } else {
-      console.error('Callback is not a function.');
-    }
-  });
+  // socket.on("get messages", (chatName, cb) => {
+  //   if (typeof cb === 'function') {
+  //     cb(messages[chatName]);
+  //   } else {
+  //     console.error('Callback is not a function.');
+  //   }
+  // });
 
-  socket.on("send message", ({ content, to, sender, chatName, isChannel }) => {
-    if (isChannel) {
-      const payload = {
-        content,
-        chatName,
-        sender,
-      };
-      socket.to(to).emit("new message", payload);
-    } else {
-      const payload = {
-        content,
-        chatName: sender,
-        sender,
-      };
-      socket.to(to).emit("new message", payload);
-    }
+  // socket.on("send message", ({ content, to, sender, chatName, isChannel }) => {
+  //   if (isChannel) {
+  //     const payload = {
+  //       content,
+  //       chatName,
+  //       sender,
+  //     };
+  //     socket.to(to).emit("new message", payload);
+  //   } else {
+  //     const payload = {
+  //       content,
+  //       chatName: sender,
+  //       sender,
+  //     };
+  //     socket.to(to).emit("new message", payload);
+  //   }
 
-    if (messages[chatName]) {
-      messages[chatName].push({ sender, content });
-    }
-  });
+  //   if (messages[chatName]) {
+  //     messages[chatName].push({ sender, content });
+  //   }
+  // });
 
   socket.on("disconnect", () => {
     users = users.filter((u) => u.id !== socket.id);
