@@ -39,17 +39,17 @@ io.on("connection", (socket) => {
     cb(messages[roomName]);
   });
 
-  // socket.on("get users", (cb) => {
-  //   cb(users);
-  // });
+  socket.on("get users", (cb) => {
+    cb(users);
+  });
 
-  // socket.on("get messages", (chatName, cb) => {
-  //   if (typeof cb === 'function') {
-  //     cb(messages[chatName]);
-  //   } else {
-  //     console.error('Callback is not a function.');
-  //   }
-  // });
+  socket.on("get messages", (chatName, cb) => {
+    if (typeof cb === 'function') {
+      cb(messages[chatName]);
+    } else {
+      console.error('Callback is not a function.');
+    }
+  });
 
   // socket.on("send message", ({ content, to, sender, chatName, isChannel }) => {
   //   if (isChannel) {
