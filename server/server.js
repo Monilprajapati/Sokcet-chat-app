@@ -25,13 +25,16 @@ let messages = {
   javascript: [],
 };
 
+// Here we are listening for a connection event. This is a built in event that is fired when a new client connects to the server.
 io.on("connection", (socket) => {
   console.log("a user connected", socket.id);
+  // Here we are listening for a join server event. This is a custom event that we will emit from the client.
   socket.on("join server", (username) => {
     const user = {
       username,
       id: socket.id,
     };
+    // Pushing the user to user array
     users.push(user);
     io.emit("new user", user);
     console.log("new user", user);
