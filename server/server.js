@@ -4,6 +4,8 @@ const app = express();
 const server = http.createServer(app);
 import { Server } from "socket.io";
 import cors from "cors";
+
+// Here we are creating a new socket server and passing the server instance to it with cores enabled.
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:5000",
@@ -15,6 +17,7 @@ app.use(cors());
 
 let users = [];
 
+// This is the object that will hold all the messages for each chat room.
 let messages = {
   general: [],
   random: [],
